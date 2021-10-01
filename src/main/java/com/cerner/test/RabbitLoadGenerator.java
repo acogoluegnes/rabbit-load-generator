@@ -55,7 +55,6 @@ public class RabbitLoadGenerator implements EnvironmentAware {
   @PostConstruct
   public void start() throws Exception {
     log.info("Using the following configurations: {}", props);
-    Utils.initTasConfig(rabbitProps, environment, props);
     for (final ScenarioConfig scenario : props.getScenarios()) {
       startScenario(scenario);
     }

@@ -10,6 +10,29 @@ The following server-side policies are in place for each queue type:
 
 ![Queue Policies](policies.PNG)
 
+## Usage With Docker
+
+```shell
+docker run -it --rm --network host pivotalrabbitmq/rabbit-load-generator \
+  --spring.rabbitmq.addresses=amqp://guest:guest@localhost:5672// \
+  --spring.profiles.active=qq
+```
+
+The available profiles are `qq`, `durable-mirrored`, `autodelete`.
+
+It is possible to specify a list of addresses, separated by commas.
+Use `/` in the URI to specify the `/`, not `%2F`.
+
+The profile scenarios are configured in [application.yaml](src/main/resources/application.yml).
+Options can be set on the command line, e.g:
+
+```shell
+docker run -it --rm --network host pivotalrabbitmq/rabbit-load-generator \
+  --spring.rabbitmq.addresses=amqp://guest:guest@localhost:5672// \
+  --spring.profiles.active=qq \
+  --rabbit-load-generator.scenarios[0].connections=20
+```
+
 ## Configuration
 
 See the following classes for additional configuration:
